@@ -160,6 +160,7 @@ ContactDataServices.urls = {
           url += "&location=" + instance.elements.location;
         }
 
+        url += "&datasets=" + instance.currentDataSet;
         url += "&take=" + (instance.maxSize || instance.picklist.maxSize);
         url += "&auth-token=" + instance.token;
         return url;
@@ -250,7 +251,13 @@ ContactDataServices.address = function(customOptions){
         }
 
     instance.currentSearchTerm = instance.input.value;
-    instance.currentCountryCode =  instance.countryCodeMapping[instance.countryList.value] || instance.countryList.value ; 
+
+    // Grab the country ISO code and (if it is present) the dataset name from the current value of the countryList (format: {countryIsoCode};{dataset})
+    var currentCountryInfo = instance.countryCodeMapping[instance.countryList.value] || instance.countryList.value;
+    currentCountryInfo = currentCountryInfo.split(";");
+
+    instance.currentCountryCode = currentCountryInfo[0];
+    instance.currentDataSet = currentCountryInfo[1] || "";
 
 
     // (Re-)set the property stating whether the search input has been reset.
