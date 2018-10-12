@@ -160,7 +160,7 @@ ContactDataServices.urls = {
           url += "&location=" + instance.elements.location;
         }
 
-        url += "&datasets=" + instance.currentDataSet;
+        url += "&dataset=" + instance.currentDataSet;
         url += "&take=" + (instance.maxSize || instance.picklist.maxSize);
         url += "&auth-token=" + instance.token;
         return url;
